@@ -19,8 +19,10 @@ start_or_stop = False
 # ---------------------------- TIMER RESET ------------------------------- #
 
 def reset_timer():
+    global start_or_stop
     window.after_cancel(timer)
     canvas.itemconfig(countdown_timer, text="25:00")
+    start_or_stop = False
 
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
@@ -75,15 +77,17 @@ def listbox_click(event):
     global WORK_MIN
     global SHORT_BREAK_MIN
     global LONG_BREAK_MIN
-    if x == "Pomodoro":
-        counting_from = WORK_MIN
-        canvas.itemconfig(countdown_timer, text="25:00")
-    if x == "Short Break":
-        counting_from = SHORT_BREAK_MIN
-        canvas.itemconfig(countdown_timer, text="5:00")
-    if x == "Long Break":
-        counting_from = LONG_BREAK_MIN
-        canvas.itemconfig(countdown_timer, text="20:00")
+    global start_or_stop
+    if not start_or_stop :
+        if x == "Pomodoro":
+            counting_from = WORK_MIN
+            canvas.itemconfig(countdown_timer, text="25:00")
+        if x == "Short Break":
+            counting_from = SHORT_BREAK_MIN
+            canvas.itemconfig(countdown_timer, text="5:00")
+        if x == "Long Break":
+            counting_from = LONG_BREAK_MIN
+            canvas.itemconfig(countdown_timer, text="20:00")
 
 listbox = Listbox(height=3)
 types_of_timers = ["Pomodoro", "Short Break", "Long Break"]

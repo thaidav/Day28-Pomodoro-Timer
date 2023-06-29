@@ -15,6 +15,7 @@ background = YELLOW
 counting_from = WORK_MIN
 timer = None
 start_or_stop = False
+more_than_once = 0
 
 # ---------------------------- TIMER RESET ------------------------------- #
 
@@ -29,18 +30,29 @@ def reset_timer():
 
 def start_timer():
     global start_or_stop
+    global more_than_once
+    more_than_once += 1
     if start_or_stop:
         start_or_stop = False
     else:
         start_or_stop = True
-    countdown(counting_from * 60)
+    if more_than_once == 1:
+        countdown(counting_from * 60)
+    else:
+        countdown(counting_from)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 
 def countdown(count):
     global start_or_stop
-    if start_or_stop :
-        secs = f"{count % 60 :02d}"
+    global counting_from
+    print(count)
+    print(counting_from)
+    counting_from = count
+    if start_or_stop:
+        secs = count % 60
+        if secs < 10:
+            secs = f"0{secs}"
         mins = math.floor(count / 60)
         canvas.itemconfig(countdown_timer, text=f"{mins}:{secs}")
     if count > 0 and start_or_stop:

@@ -89,17 +89,19 @@ def listbox_click(event):
     global WORK_MIN
     global SHORT_BREAK_MIN
     global LONG_BREAK_MIN
-    global start_or_stop
     if not start_or_stop :
         if x == "Pomodoro":
             counting_from = WORK_MIN
             canvas.itemconfig(countdown_timer, text="25:00")
+            heading.config(text="Timer", fg=GREEN)
         if x == "Short Break":
             counting_from = SHORT_BREAK_MIN
             canvas.itemconfig(countdown_timer, text="5:00")
+            heading.config(text="Break", fg=RED)
         if x == "Long Break":
             counting_from = LONG_BREAK_MIN
             canvas.itemconfig(countdown_timer, text="20:00")
+            heading.config(text="Break", fg=RED)
 
 listbox = Listbox(height=3)
 types_of_timers = ["Pomodoro", "Short Break", "Long Break"]
